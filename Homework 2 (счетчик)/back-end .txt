@@ -1,0 +1,46 @@
+package com.example.thesecondtask
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.example.thesecondtask.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private var count = 0     // переменная для хранения значения счетчика
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Инициализация ViewBinding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        // Обновляем TextView начальным значением
+        updateCounterText()
+
+        // Обработчик для кнопки "+"
+        binding.plusButton.setOnClickListener {
+            count++
+            updateCounterText()
+        }
+
+        // Обработчик для кнопки "-"
+        binding.minusButton.setOnClickListener {
+            if (count > 0) {
+                count--
+                updateCounterText()
+            }
+        }
+
+        // Обработчик для кнопки "Сбросить"
+        binding.resetButton.setOnClickListener {
+            count = 0
+            updateCounterText()
+        }
+    }
+
+    private fun updateCounterText() {
+        binding.counterTextView.text = count.toString()
+    }
+}
